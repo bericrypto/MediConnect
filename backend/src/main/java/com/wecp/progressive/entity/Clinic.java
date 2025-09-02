@@ -1,17 +1,24 @@
 package com.wecp.progressive.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Clinic {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int clinicId;
     private String clinicName;
     private String location;
     private int doctorId;
-    private long contactNumber;
+    private String contactNumber;
     private int establishedYear;
-
     public Clinic() {
     }
-
-    public Clinic(int clinicId, String clinicName, String location, int doctorId, long contactNumber,
+    public Clinic(int clinicId, String clinicName, String location, int doctorId, String contactNumber,
             int establishedYear) {
         this.clinicId = clinicId;
         this.clinicName = clinicName;
@@ -20,7 +27,6 @@ public class Clinic {
         this.contactNumber = contactNumber;
         this.establishedYear = establishedYear;
     }
-    
     public int getClinicId() {
         return clinicId;
     }
@@ -45,10 +51,10 @@ public class Clinic {
     public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
-    public long getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
-    public void setContactNumber(long contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
     public int getEstablishedYear() {
@@ -57,5 +63,6 @@ public class Clinic {
     public void setEstablishedYear(int establishedYear) {
         this.establishedYear = establishedYear;
     }
+
     
 }
