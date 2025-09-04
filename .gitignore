@@ -6,3 +6,5 @@ initialize-github.sh
 frontend/.angular
 backend-tests.log
 frontend-tests.log
+.idea
+.systemfiles
