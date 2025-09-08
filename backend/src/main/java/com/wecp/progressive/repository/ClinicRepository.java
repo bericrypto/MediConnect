@@ -9,6 +9,6 @@ import com.wecp.progressive.entity.Clinic;
 
 @Repository
 public interface ClinicRepository extends JpaRepository<Clinic,Integer>{
-
     List<Clinic> findByLocation(String location);
+    List<Clinic> findByDoctorId(int doctorId);
 }

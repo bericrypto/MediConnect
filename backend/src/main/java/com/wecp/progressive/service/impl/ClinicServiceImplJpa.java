@@ -20,12 +20,12 @@ public class ClinicServiceImplJpa implements ClinicService {
     }
 
     @Override
-    public List<Clinic> getAllClinics() throws Exception {
+    public List<Clinic> getAllClinics() {
      return cr.findAll();
     }
 
     @Override
-    public Clinic getClinicById(int clinicId) throws Exception {
+    public Clinic getClinicById(int clinicId)  {
         try {
             return cr.findById(clinicId).orElseThrow();
         } catch (Exception e) {
@@ -34,13 +34,13 @@ public class ClinicServiceImplJpa implements ClinicService {
     }
 
     @Override
-    public Integer addClinic(Clinic clinic) throws Exception {
+    public Integer addClinic(Clinic clinic) {
      return cr.save(clinic).getClinicId();
      
     }
 
     @Override
-    public void updateClinic(Clinic clinic) throws Exception {
+    public void updateClinic(Clinic clinic){
        Clinic d=cr.findById(clinic.getClinicId()).orElseThrow();
        d.setClinicName(clinic.getClinicName());
        d.setContactNumber(clinic.getContactNumber());
@@ -51,7 +51,7 @@ public class ClinicServiceImplJpa implements ClinicService {
     }
 
     @Override
-    public void deleteClinic(int clinicId) throws Exception {
+    public void deleteClinic(int clinicId) {
        cr.deleteById(clinicId);
     }
 
@@ -62,8 +62,7 @@ public class ClinicServiceImplJpa implements ClinicService {
 
     @Override
     public List<Clinic> getAllClinicByDoctorId(int doctorId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllClinicByDoctorId'");
+        return cr.findByDoctorId(doctorId);
     }
 
 }
