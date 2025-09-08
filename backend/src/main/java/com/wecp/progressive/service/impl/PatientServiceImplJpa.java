@@ -19,7 +19,6 @@ public class PatientServiceImplJpa  implements PatientService{
     @Autowired
     PatientRepository pr;
     
-
     public PatientServiceImplJpa(PatientRepository pr) {
         this.pr = pr;
     }
@@ -31,10 +30,10 @@ public class PatientServiceImplJpa  implements PatientService{
 
     @Override
     public Integer addPatient(Patient patient) throws Exception {
-    //   List<Patient> res=pr.findByEmail(patient.getEmail());
-    //   if(res.size()>0){
-    //     throw new PatientAlreadyExistsException();
-    //   }
+      List<Patient> res=pr.findByEmail(patient.getEmail());
+      if(res.size()>0){
+        throw new PatientAlreadyExistsException();
+      }
       return pr.save(patient).getPatientId();
       
     }
@@ -63,14 +62,14 @@ public class PatientServiceImplJpa  implements PatientService{
     }
 
     @Override
-    public Patient getPatientById(int patientId) /**throws Exception **/{
-        try {
-            return pr.findById(patientId).orElseThrow();
-        } catch (Exception e) {
-            return null;
-        }
+    public Patient getPatientById(int patientId) throws Exception {
+        // try {
+        //     return pr.findById(patientId).orElseThrow();
+        // } catch (Exception e) {
+        //     return null;
+        // }
   
-    // return pr.findById(patientId); /** .orElseThrow(()->new PatientNotFoundException());**/
+    return pr.findById(patientId).orElseThrow(()->new PatientNotFoundException());
   
  
     }
