@@ -1,7 +1,7 @@
 package com.wecp.progressive.exception;
 
 public class DoctorAlreadyExistsException extends RuntimeException {
-    public DoctorAlreadyExistsException(){
-        super();
+    public DoctorAlreadyExistsException(String e){
+        super(e);
     }
 }
