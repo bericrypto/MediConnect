@@ -1,3 +1,5 @@
+
+
 package com.wecp.progressive.service;
 
 import com.wecp.progressive.dto.PatientDTO;
@@ -17,13 +19,16 @@ public interface PatientService {
     default void emptyArrayList() {
     }
 
-    default void updatePatient(Patient patient) throws Exception {}
+    void updatePatient(Patient patient) throws Exception;
+    //Do not implement these methods in PatientServiceImplArraylist.java class
 
-    default void deletePatient(int patientId) throws Exception {}
+    default void deletePatient(int patientId) throws Exception{}
 
     default Patient getPatientById(int patientId) throws Exception {
         return null;
     }
 
-    default public void modifyPatientDetails(PatientDTO patientDTO) { }
+    //Do not implement these methods in PatientServiceImplArraylist.java and PatientServiceImplJdbc.java class
+    //Do not implement this method until day-13
+    default public void modifyPatientDetails(PatientDTO patientDTO) throws Exception{ }
 }

@@ -60,7 +60,7 @@ public class DoctorServiceImplJpa implements DoctorService {
     }
 
     @Override
-    public void modifyDoctorDetails(DoctorDTO doctorDTO)  {
+    public void modifyDoctorDetails(DoctorDTO doctorDTO) throws Exception {
         Doctor existingDoctor = doctorRepository.findByEmail(doctorDTO.getEmail());
         User doctorUser = userRepository.findByDoctorId(doctorDTO.getDoctorId());
         if (existingDoctor != null && existingDoctor.getDoctorId() != doctorDTO.getDoctorId()) {

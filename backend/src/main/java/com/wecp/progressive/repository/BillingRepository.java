@@ -17,6 +17,10 @@ import java.util.List;
 @Repository
 public interface BillingRepository extends JpaRepository<Billing, Integer>{
     List<Billing> findByPatient_PatientId(int patientId);
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Billing b WHERE b.patient.patientId = :patientId")
+    void deleteByPatientId(@Param("patientId") int patientId);
 
     // @Modifying
     // @Transactional
