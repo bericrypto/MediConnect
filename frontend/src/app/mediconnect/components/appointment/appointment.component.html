@@ -1,0 +1,28 @@
+<div class="appointment-form">
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+      <label>Appointment ID</label>
+      <input type="number" formControlName="appointmentId" />
+  
+      <label>Patient ID</label>
+      <input type="number" formControlName="patientId" />
+  
+      <label>Clinic ID</label>
+      <input type="number" formControlName="clinicId" />
+  
+      <label>Appointment Date</label>
+      <input type="date" formControlName="appointmentDate" />
+  
+      <label>Status</label>
+      <input type="text" formControlName="status" />
+  
+      <label>Purpose</label>
+      <textarea formControlName="purpose"></textarea>
+  
+      <button type="submit">Submit</button>
+      <button type="button" (click)="resetForm()">Reset</button>
+    </form>
+  
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
+  

@@ -1,6 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
- 
+
 @Component({
   selector: 'app-patient-create',
   templateUrl: './patientcreate.component.html',
@@ -10,13 +11,13 @@ export class PatientCreateComponent implements OnInit {
   patientForm!: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
- 
+
   constructor(private fb: FormBuilder) {}
- 
+
   ngOnInit(): void {
     this.initializeForm();
   }
- 
+
   initializeForm(): void {
     this.patientForm = this.fb.group({
       patientId: [null, [Validators.required, Validators.min(1)]],
@@ -27,7 +28,7 @@ export class PatientCreateComponent implements OnInit {
       address: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
- 
+
   onSubmit(): void {
     if (this.patientForm.valid) {
       this.successMessage = 'Patient has been successfully created!';
@@ -45,7 +46,7 @@ export class PatientCreateComponent implements OnInit {
       this.successMessage = '';
     }
   }
- 
+
   resetForm(): void {
     this.patientForm.reset({
       patientId: null,
@@ -58,7 +59,7 @@ export class PatientCreateComponent implements OnInit {
     this.successMessage = '';
     this.errorMessage = '';
   }
- 
+
   // Getters for template
   get patientId() { return this.patientForm.get('patientId'); }
   get fullName() { return this.patientForm.get('fullName'); }

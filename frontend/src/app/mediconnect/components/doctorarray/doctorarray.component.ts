@@ -1,5 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
- 
+
 @Component({
   selector: 'app-doctor-array',
   templateUrl: './doctorarray.component.html',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class DoctorArrayComponent implements OnInit {
   doctors: any[] = [];
   showDetails: boolean = false;
- 
+
   ngOnInit(): void {
     this.doctors = [
       { fullName: 'Dr. Jane Smith', specialty: 'Cardiology', contactNumber: '111-111-1111', email: 'jane.smith@example.com', yearsOfExperience: 10 },
@@ -16,7 +17,7 @@ export class DoctorArrayComponent implements OnInit {
       { fullName: 'Dr. Emily Johnson', specialty: 'Pediatrics', contactNumber: '333-333-3333', email: 'emily.johnson@example.com', yearsOfExperience: 12 }
     ];
   }
- 
+
   toggleDetails(): void {
     this.showDetails = !this.showDetails;
   }

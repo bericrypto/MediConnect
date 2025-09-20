@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
- 
+
 @Component({
   selector: 'app-clinic-create',
   templateUrl: './cliniccreate.component.html',
@@ -10,9 +10,9 @@ export class ClinicCreateComponent implements OnInit {
   clinicForm!: FormGroup;
   successMessage = '';
   errorMessage = '';
- 
+
   constructor(private formBuilder: FormBuilder) {}
- 
+
   ngOnInit(): void {
     this.clinicForm = this.formBuilder.group({
       clinicId: ['', [Validators.required, Validators.min(1)]],
@@ -22,7 +22,7 @@ export class ClinicCreateComponent implements OnInit {
       establishedYear: ['', [Validators.required, Validators.pattern(/^(19|20)\d{2}$/)]],
     });
   }
- 
+
   onSubmit(): void {
     if (this.clinicForm.valid) {
       this.successMessage = 'Clinic has been successfully created!';
@@ -33,11 +33,10 @@ export class ClinicCreateComponent implements OnInit {
       this.successMessage = '';
     }
   }
- 
+
   resetForm(): void {
     this.clinicForm.reset();
     this.successMessage = '';
     this.errorMessage = '';
   }
 }
- 
