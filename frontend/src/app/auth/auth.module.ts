@@ -10,15 +10,13 @@ import { RegistrationComponent } from './components/registration/registration.co
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrationComponent,
-    
+    RegistrationComponent
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule
+    FormsModule
   ],
   exports: [
     LoginComponent,
