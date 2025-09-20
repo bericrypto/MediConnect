@@ -1,16 +1,18 @@
-.login-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 1rem;
+// .login-container {
+//     max-width: 400px;
+//     margin: auto;
+//     padding: 1rem;
   
-    .error {
-      color: red;
-      margin-top: 10px;
-    }
+//     .error {
+//       color: red;
+//       margin-top: 10px;
+//     }
   
-    .success {
-      color: green;
-      margin-top: 10px;
-    }
-  }
-  
+//     .success {
+//       color: green;
+//       margin-top: 10px;
+//     }
+//   }
+
+.error { color: #c00; }
+.success { color: #090; }

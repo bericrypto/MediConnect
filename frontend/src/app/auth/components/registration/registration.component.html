@@ -1,53 +1,23 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+  <input type="text" formControlName="username" />
+  <input type="email" formControlName="email" />
+  <input type="password" formControlName="password" />
+  <select formControlName="role">
+    <option value="">Select role</option>
+    <option value="DOCTOR">Doctor</option>
+    <option value="PATIENT">Patient</option>
+    <option value="ADMIN">Admin</option>
+  </select>
 
-<div class="registration-container">
-    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label>Username:</label>
-        <input type="text" formControlName="username" />
-      </div>
-  
-      <div>
-        <label>Password:</label>
-        <input type="password" formControlName="password" />
-      </div>
-  
-      <div>
-        <label>Role:</label>
-        <select formControlName="role">
-          <option value="DOCTOR">Doctor</option>
-          <option value="PATIENT">Patient</option>
-        </select>
-      </div>
-  
-      <div>
-        <label>Full Name:</label>
-        <input type="text" formControlName="fullName" />
-      </div>
-  
-      <div>
-        <label>Contact Number:</label>
-        <input type="text" formControlName="contactNumber" />
-      </div>
-  
-      <div>
-        <label>Email:</label>
-        <input type="email" formControlName="email" />
-      </div>
-  
-      <div>
-        <label>Specialty:</label>
-        <input type="text" formControlName="specialty" />
-      </div>
-  
-      <div>
-        <label>Years of Experience:</label>
-        <input type="number" formControlName="yearsOfExperience" />
-      </div>
-  
-      <button type="submit">Register</button>
-    </form>
-  
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-  </div>
-  
+  <input type="text" formControlName="fullName" />
+  <input type="text" formControlName="contactNumber" />
+  <input type="text" formControlName="specialty" />
+  <input type="number" formControlName="yearsOfExperience" />
+  <input type="date" formControlName="dateOfBirth" />
+  <textarea formControlName="address"></textarea>
+
+  <button type="submit">Register</button>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+</form>

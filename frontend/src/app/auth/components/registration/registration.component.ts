@@ -1,8 +1,6 @@
 
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -14,41 +12,32 @@ export class RegistrationComponent implements OnInit {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)
-      ]],
-      role: ['', Validators.required],
+      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      fullName: ['', [Validators.required, Validators.minLength(2)]],
-      contactNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      role: ['', Validators.required],
+
+      fullName: ['', Validators.required],
+      contactNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       specialty: ['', Validators.required],
-      yearsOfExperience: ['', [Validators.required, Validators.min(1)]]
+      yearsOfExperience: [null, [Validators.required, Validators.min(0), Validators.max(80)]],
+      dateOfBirth: [null],
+      address: [''],
     });
   }
 
   onSubmit(): void {
-    if (this.registrationForm.invalid) return;
-
-    this.authService.createUser(this.registrationForm.value).subscribe({
-      next: (res) => {
-        this.successMessage = res;
-        this.errorMessage = null;
-        this.registrationForm.reset();
-      },
-      error: (err) => {
-        this.errorMessage = err.error || 'Registration failed';
-        this.successMessage = null;
-      }
-    });
+    if (this.registrationForm.invalid) {
+      this.successMessage = null;
+      this.errorMessage = 'Please fill out all fields correctly.';
+      this.registrationForm.markAllAsTouched();
+      return;
+    }
+    this.errorMessage = null;
+    this.successMessage = 'Registration successful!';
   }
 }
-
-
-

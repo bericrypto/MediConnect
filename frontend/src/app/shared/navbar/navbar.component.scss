@@ -1,0 +1,20 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background: #2c3e50;
+    padding: 10px;
+  
+    a, button {
+      color: #fff;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+  
+    button:hover, a:hover {
+      text-decoration: underline;
+    }
+  }
+  

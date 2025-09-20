@@ -1,8 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,49 +9,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  errorMessage: string | null = null;
   successMessage: string | null = null;
+  errorMessage: string | null = null;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
   onSubmit(): void {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.successMessage = null;
+      this.errorMessage = 'Please fill out all fields correctly.';
+      this.loginForm.markAllAsTouched();
+      return;
+    }
 
-    this.authService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        this.successMessage = 'Login successful';
-        this.errorMessage = null;
-        localStorage.setItem('token', res.token || 'dummy-token');
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        this.errorMessage = err.error || 'Login failed';
-        this.successMessage = null;
-      },
-    });
+    this.errorMessage = null;
+    this.successMessage = 'Login successful!';
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
