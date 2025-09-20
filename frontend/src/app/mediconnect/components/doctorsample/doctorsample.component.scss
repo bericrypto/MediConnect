@@ -1,0 +1,29 @@
+.doctor-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #eef7ff;
+  
+    h2 {
+      margin-bottom: 12px;
+    }
+  
+    p {
+      margin: 4px 0;
+    }
+  
+    button {
+      margin-top: 12px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background-color: #388e3c;
+      color: white;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #1b5e20;
+      }
+    }
+  }
+  
