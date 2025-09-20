@@ -1,0 +1,32 @@
+<form [formGroup]="clinicForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Clinic ID:</label>
+      <input type="number" formControlName="clinicId" />
+    </div>
+  
+    <div>
+      <label>Clinic Name:</label>
+      <input type="text" formControlName="clinicName" />
+    </div>
+  
+    <div>
+      <label>Location:</label>
+      <input type="text" formControlName="location" />
+    </div>
+  
+    <div>
+      <label>Contact Number:</label>
+      <input type="text" formControlName="contactNumber" />
+    </div>
+  
+    <div>
+      <label>Established Year:</label>
+      <input type="number" formControlName="establishedYear" />
+    </div>
+  
+    <button type="submit">Submit</button>
+    <button type="button" (click)="resetForm()">Reset</button>
+  </form>
+  
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

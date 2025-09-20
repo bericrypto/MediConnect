@@ -1,0 +1,39 @@
+<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Doctor ID:</label>
+      <input type="number" formControlName="doctorId" />
+    </div>
+  
+    <div>
+      <label>Full Name:</label>
+      <input type="text" formControlName="fullName" />
+    </div>
+  
+    <div>
+      <label>Specialty:</label>
+      <input type="text" formControlName="specialty" />
+    </div>
+  
+    <div>
+      <label>Contact Number:</label>
+      <input type="text" formControlName="contactNumber" />
+    </div>
+  
+    <div>
+      <label>Email:</label>
+      <input type="email" formControlName="email" />
+    </div>
+  
+    <div>
+      <label>Years of Experience:</label>
+      <input type="number" formControlName="yearsOfExperience" />
+    </div>
+  
+    <button type="submit">Submit</button>
+    <button type="button" (click)="resetForm()">Reset</button>
+  </form>
+  
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  
+ 

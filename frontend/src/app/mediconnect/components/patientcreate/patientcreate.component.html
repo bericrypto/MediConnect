@@ -1,63 +1,42 @@
-<<<<<<< HEAD
-<div class="patient-form">
-  <form (ngSubmit)="onSubmit()" #patientForm="ngForm">
+<form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
   <div>
-  <label for="patientId">Patient ID</label>
-  <input type="number" id="patientId" [(ngModel)]="patient.patientId" name="patientId" required />
+    <label>Patient ID:</label>
+    <input type="number" formControlName="patientId" />
+    <div *ngIf="patientId?.invalid && patientId?.touched">ID must be greater than 0.</div>
   </div>
+
   <div>
-  <label for="fullName">Full Name</label>
-  <input type="text" id="fullName" [(ngModel)]="patient.fullName" name="fullName" required />
+    <label>Full Name:</label>
+    <input type="text" formControlName="fullName" />
+    <div *ngIf="fullName?.invalid && fullName?.touched">Name must be at least 2 characters.</div>
   </div>
+
   <div>
-  <label for="dateOfBirth">Date of Birth</label>
-  <input type="date" id="dateOfBirth" [(ngModel)]="patient.dateOfBirth" name="dateOfBirth" required />
+    <label>Date of Birth:</label>
+    <input type="date" formControlName="dateOfBirth" />
   </div>
+
   <div>
-  <label for="contactNumber">Contact Number</label>
-  <input type="text" id="contactNumber" [(ngModel)]="patient.contactNumber" name="contactNumber" required />
+    <label>Contact Number:</label>
+    <input type="text" formControlName="contactNumber" />
+    <div *ngIf="contactNumber?.invalid && contactNumber?.touched">Must be a 10-digit number.</div>
   </div>
+
   <div>
-  <label for="email">Email</label>
-  <input type="email" id="email" [(ngModel)]="patient.email" name="email" required />
+    <label>Email:</label>
+    <input type="email" formControlName="email" />
+    <div *ngIf="email?.invalid && email?.touched">Enter a valid email.</div>
   </div>
+
   <div>
-  <label for="address">Address</label>
-  <textarea id="address" [(ngModel)]="patient.address" name="address" required></textarea>
+    <label>Address:</label>
+    <input type="text" formControlName="address" />
+    <div *ngIf="address?.invalid && address?.touched">Address must be at least 5 characters.</div>
   </div>
+
   <button type="submit">Submit</button>
   <button type="button" (click)="resetForm()">Reset</button>
-  </form>
-  <p *ngIf="message" [ngClass]="{ 'success-message': isSuccess, 'error-message': !isSuccess }">
-  {{ message }}
-  </p>
-  </div>
-=======
+</form>
 
-
-<div class="patient-form">
-    <h2>Create Patient</h2>
-    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-      <label>Full Name</label>
-      <input formControlName="fullName" type="text" />
-  
-      <label>Email</label>
-      <input formControlName="email" type="email" />
-  
-      <label>Date of Birth</label>
-      <input formControlName="dateOfBirth" type="date" />
-  
-      <label>Address</label>
-      <input formControlName="address" type="text" />
-  
-      <label>Contact Number</label>
-      <input formControlName="contactNumber" type="text" />
-  
-      <button type="submit" [disabled]="patientForm.invalid">Create</button>
-    </form>
-  
-    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-  </div>
-  
->>>>>>> e12c5e1194646357b89af543b45615487f2537fc
+<div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

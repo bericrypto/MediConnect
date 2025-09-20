@@ -1,35 +1,20 @@
 export class Patient {
-    patientId: number;
-    fullName: string;
-    dateOfBirth: Date;
-    contactNumber: string;
-    email: string;
-    address: string;
-   
     constructor(
-      patientId: number,
-      fullName: string,
-      dateOfBirth: Date,
-      contactNumber: string,
-      email: string,
-      address: string
-    ) {
-      this.patientId = patientId;
-      this.fullName = fullName;
-      this.dateOfBirth = dateOfBirth;
-      this.contactNumber = contactNumber;
-      this.email = email;
-      this.address = address;
-    }
-   
+      public patientId: number,
+      public fullName: string,
+      public dateOfBirth: Date,
+      public contactNumber: string,
+      public email: string,
+      public address: string
+    ) {}
+  
     logAttributes(): void {
-      console.log('patientId:', this.patientId);
-      console.log('fullName:', this.fullName);
-      console.log('dateOfBirth:', this.dateOfBirth);
-      console.log('contactNumber:', this.contactNumber);
-      console.log('email:', this.email);
-      console.log('address:', this.address);
+      console.log("patientId:", this.patientId);
+      console.log("fullName:", this.fullName);
+      console.log("dateOfBirth:", this.dateOfBirth);
+      console.log("contactNumber:", this.contactNumber);
+      console.log("email:", this.email);
+      console.log("address:", this.address);
     }
-  
-  
   }
+  
