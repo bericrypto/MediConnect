@@ -6,3 +6,8 @@ initialize-github.sh
 frontend/.angular
 backend-tests.log
 frontend-tests.log
+<<<<<<< HEAD
+=======
+.idea
+.systemfiles
+>>>>>>> e12c5e1194646357b89af543b45615487f2537fc
