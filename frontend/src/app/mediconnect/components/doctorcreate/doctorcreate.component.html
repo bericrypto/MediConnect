@@ -1,65 +1,37 @@
-<!-- <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label>Doctor ID:</label>
-      <input type="number" formControlName="doctorId" />
-    </div>
-  
-    <div>
-      <label>Full Name:</label>
-      <input type="text" formControlName="fullName" />
-    </div>
-  
-    <div>
-      <label>Specialty:</label>
-      <input type="text" formControlName="specialty" />
-    </div>
-  
-    <div>
-      <label>Contact Number:</label>
-      <input type="text" formControlName="contactNumber" />
-    </div>
-  
-    <div>
-      <label>Email:</label>
-      <input type="email" formControlName="email" />
-    </div>
-  
-    <div>
-      <label>Years of Experience:</label>
-      <input type="number" formControlName="yearsOfExperience" />
-    </div>
-  
-    <button type="submit">Submit</button>
-    <button type="button" (click)="resetForm()">Reset</button>
-  </form>
-  
-  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-   -->
-  
-
-   <div class="doctor-form">
-    <h2>Create Doctor</h2>
-    <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
-      <label>Full Name</label>
-      <input formControlName="fullName" type="text" />
-  
-      <label>Email</label>
-      <input formControlName="email" type="email" />
-  
-      <label>Specialty</label>
-      <input formControlName="specialty" type="text" />
-  
-      <label>Years of Experience</label>
-      <input formControlName="yearsOfExperience" type="number" />
-  
-      <label>Contact Number</label>
-      <input formControlName="contactNumber" type="text" />
-  
-      <button type="submit" [disabled]="doctorForm.invalid">Create</button>
-    </form>
-  
-    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-  </div>
-  
+<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>Doctor ID:</label>
+        <input type="number" formControlName="doctorId" />
+      </div>
+    
+      <div>
+        <label>Full Name:</label>
+        <input type="text" formControlName="fullName" />
+      </div>
+    
+      <div>
+        <label>Specialty:</label>
+        <input type="text" formControlName="specialty" />
+      </div>
+    
+      <div>
+        <label>Contact Number:</label>
+        <input type="text" formControlName="contactNumber" />
+      </div>
+    
+      <div>
+        <label>Email:</label>
+        <input type="email" formControlName="email" />
+      </div>
+    
+      <div>
+        <label>Years of Experience:</label>
+        <input type="number" formControlName="yearsOfExperience" />
+      </div>
+    
+      <button type="submit">Submit</button>
+      <button type="button" (click)="resetForm()">Reset</button>
+    </form>
+    
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

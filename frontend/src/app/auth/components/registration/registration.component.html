@@ -1,23 +1,101 @@
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
-  <input type="text" formControlName="username" />
-  <input type="email" formControlName="email" />
-  <input type="password" formControlName="password" />
-  <select formControlName="role">
-    <option value="">Select role</option>
-    <option value="DOCTOR">Doctor</option>
-    <option value="PATIENT">Patient</option>
-    <option value="ADMIN">Admin</option>
-  </select>
+<div class="registration-form"> 
 
-  <input type="text" formControlName="fullName" />
-  <input type="text" formControlName="contactNumber" />
-  <input type="text" formControlName="specialty" />
-  <input type="number" formControlName="yearsOfExperience" />
-  <input type="date" formControlName="dateOfBirth" />
-  <textarea formControlName="address"></textarea>
+  <h2>Register</h2> 
 
-  <button type="submit">Register</button>
+ 
 
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-  <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
-</form>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()"> 
+
+    <!-- Username --> 
+
+    <div> 
+
+      <label for="username">Username</label> 
+
+      <input id="username" type="text" formControlName="username" /> 
+
+      <div *ngIf="username?.invalid && username?.touched" class="error"> 
+
+        Username is required and must not contain special characters. 
+
+      </div> 
+
+    </div> 
+
+ 
+
+    <!-- Email --> 
+
+    <div> 
+
+      <label for="email">Email</label> 
+
+      <input id="email" type="email" formControlName="email" /> 
+
+      <div *ngIf="email?.invalid && email?.touched" class="error"> 
+
+        Enter a valid email address. 
+
+      </div> 
+
+    </div> 
+
+ 
+
+    <!-- Password --> 
+
+    <div> 
+
+      <label for="password">Password</label> 
+
+      <input id="password" type="password" formControlName="password" /> 
+
+      <div *ngIf="password?.invalid && password?.touched" class="error"> 
+
+        Password must be at least 8 characters, contain one uppercase letter and one number. 
+
+      </div> 
+
+    </div> 
+
+ 
+
+    <!-- Role --> 
+
+    <div> 
+
+      <label for="role">Role</label> 
+
+      <select id="role" formControlName="role"> 
+
+        <option value="" disabled>Select Role</option> 
+
+        <option value="DOCTOR">Doctor</option> 
+
+        <option value="PATIENT">Patient</option> 
+
+      </select> 
+
+      <div *ngIf="role?.invalid && role?.touched" class="error"> 
+
+        Role is required. 
+
+      </div> 
+
+    </div> 
+
+ 
+
+    <button type="submit">Register</button> 
+
+  </form> 
+
+ 
+
+  <!-- Feedback --> 
+
+  <p *ngIf="successMessage" class="success">{{ successMessage }}</p> 
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p> 
+
+</div> 

@@ -1,6 +1,9 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MediConnectService } from '../../services/mediconnect.service';
+
 @Component({
   selector: 'app-cliniccreate',
   templateUrl: './cliniccreate.component.html',
@@ -11,10 +14,12 @@ export class ClinicCreateComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
   doctor: any;
+
   constructor(
     private fb: FormBuilder,
     private mediConnectService: MediConnectService
   ) {}
+
   ngOnInit(): void {
     this.clinicForm = this.fb.group({
       doctor: [''],
@@ -24,12 +29,14 @@ export class ClinicCreateComponent implements OnInit {
       contactNumber: ['', Validators.required],
       establishedYear: ['', Validators.required],
     });
+
     const doctorId = Number(localStorage.getItem('doctor_id'));
     this.mediConnectService.getDoctorById(doctorId).subscribe((doctor) => {
       this.doctor = doctor;
       this.clinicForm.patchValue({ doctor: doctor });
     });
   }
+
   onSubmit(): void {
     if (this.clinicForm.valid) {
       this.mediConnectService.addClinic(this.clinicForm.value).subscribe({

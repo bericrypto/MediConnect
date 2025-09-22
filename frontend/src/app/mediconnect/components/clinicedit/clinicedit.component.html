@@ -1,0 +1,22 @@
+<div class="clinic-edit-container">
+        <h2>Edit Clinic</h2>
+      
+        <form [formGroup]="clinicForm" (ngSubmit)="onSubmit()">
+          <label>Clinic Name:</label>
+          <input formControlName="clinicName" type="text" />
+      
+          <label>Location:</label>
+          <input formControlName="location" type="text" />
+      
+          <label>Contact Number:</label>
+          <input formControlName="contactNumber" type="text" />
+      
+          <label>Established Year:</label>
+          <input formControlName="establishedYear" type="number" />
+      
+          <button type="submit" [disabled]="clinicForm.invalid">Update Clinic</button>
+        </form>
+      
+        <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+        <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+      </div>

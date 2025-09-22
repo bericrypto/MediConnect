@@ -1,54 +1,19 @@
-<!-- <div class="login-form">
-    <h2>Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-      <div>
-        <label for="username">Username</label>
-        <input id="username" type="text" formControlName="username" />
-        <div *ngIf="username?.invalid && username?.touched" class="error">
-          Username is required and must not contain special characters.
-        </div>
-      </div>
-      
-      <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email" />
-        <div *ngIf="email?.invalid && email?.touched" class="error">
-          Enter a valid email address.
-        </div>
-      </div>
-      
-      <div>
-        <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password" />
-        <div *ngIf="password?.invalid && password?.touched" class="error">
-          Password must be at least 8 characters, contain one uppercase letter and one number.
-        </div>
-      </div>
-    
-      <div>
-        <label for="role">Role</label>
-        <select id="role" formControlName="role">
-          <option value="" disabled>Select Role</option>
-          <option value="DOCTOR">Doctor</option>
-          <option value="PATIENT">Patient</option>
-        </select>
-        <div *ngIf="role?.invalid && role?.touched" class="error">
-          Role is required.
-        </div>
-      </div>
-      <button type="submit">Login</button>
-    </form>
-  
-    <p *ngIf="successMessage" class="success">{{successMessage}}</p>
-    <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
-  </div> -->
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Username:</label>
+      <input type="text" formControlName="username" />
+    </div>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-    <input type="text" formControlName="username" />
-    <input type="password" formControlName="password" />
+    <div>
+      <label>Password:</label>
+      <input type="password" formControlName="password" />
+    </div>
+
     <button type="submit">Login</button>
-  
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
   </form>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+</div>

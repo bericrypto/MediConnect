@@ -1,28 +1,23 @@
 <div class="appointment-form">
-    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
-      <label>Appointment ID</label>
-      <input type="number" formControlName="appointmentId" />
+    <h2>Book Appointment</h2>
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+      <label>Clinic:</label>
+      <select formControlName="clinic">
+        <option *ngFor="let clinic of clinics" [ngValue]="clinic">{{ clinic.clinicName }}</option>
+      </select>
   
-      <label>Patient ID</label>
-      <input type="number" formControlName="patientId" />
+      <label>Date:</label>
+      <input type="date" formControlName="appointmentDate" />
   
-      <label>Clinic ID</label>
-      <input type="number" formControlName="clinicId" />
+      <label>Status:</label>
+      <input type="text" formControlName="status" />
   
-      <label>Appointment Date</label>
-      <input type="date" formControlName="appointmentDate" />
+      <label>Purpose:</label>
+      <input type="text" formControlName="purpose" />
   
-      <label>Status</label>
-      <input type="text" formControlName="status" />
+      <button type="submit">Book</button>
+    </form>
   
-      <label>Purpose</label>
-      <textarea formControlName="purpose"></textarea>
-  
-      <button type="submit">Submit</button>
-      <button type="button" (click)="resetForm()">Reset</button>
-    </form>
-  
-    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
-  

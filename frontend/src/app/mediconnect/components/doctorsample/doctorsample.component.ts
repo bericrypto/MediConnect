@@ -22,4 +22,3 @@ export class DoctorSampleComponent {
     console.log(this.doctor);
   }
 }
-

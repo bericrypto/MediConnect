@@ -1,57 +1,11 @@
-.patient-form {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
 
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
   }
-
-  div {
-    margin-bottom: 12px;
-
-    label {
-      display: block;
-      font-weight: bold;
-    }
-
-    input {
-      width: 100%;
-      padding: 6px;
-      margin-top: 4px;
-      border-radius: 4px;
-      border: 1px solid #aaa;
-    }
+  input, button {
+    margin: 8px 0;
   }
-
-  button {
-    margin-right: 10px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-
-    &:first-of-type {
-      background-color: #4caf50;
-      color: white;
-    }
-
-    &:last-of-type {
-      background-color: #f44336;
-      color: white;
-    }
-  }
-
-  .success {
-    color: green;
-    font-weight: bold;
-  }
-
-  .error {
-    color: red;
-    font-weight: bold;
-  }
-}
+  .success { color: green; }
+  .error { color: red; }
