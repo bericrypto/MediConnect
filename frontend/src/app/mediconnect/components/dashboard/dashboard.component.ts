@@ -6,35 +6,45 @@ import { MediConnectService } from '../../services/mediconnect.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  doctorId!: number;
-  doctorDetails: any;
+  role: string = '';
+  patientId!: number;
+  patientDetails: any;
   clinics: any[] = [];
-  selectClinicAppointments: any[] = [];
+  appointments: any[] = [];
   constructor(private mediConnectService: MediConnectService) {}
   ngOnInit(): void {
-    this.doctorId = Number(localStorage.getItem('doctor_id')) || 1;
-    this.loadDoctorData();
+    this.role = localStorage.getItem('role') || '';
+    if (this.role === 'PATIENT') {
+      this.patientId = Number(localStorage.getItem('patient_id'));
+      this.loadPatientData();
+    }
   }
-  loadDoctorData(): void {
-    // Fetch doctor details
-    this.mediConnectService.getDoctorById(this.doctorId).subscribe({
-      next: (doctor) => {
-        this.doctorDetails = doctor;
+  loadPatientData(): void {
+    if (!this.patientId) return;
+    this.mediConnectService.getPatientById(this.patientId).subscribe({
+      next: (patient) => {
+        this.patientDetails = patient;
       },
       error: () => {
-        this.doctorDetails = undefined;
+        this.patientDetails = undefined;
       }
     });
-    // Fetch clinics separately (not nested)
-    this.mediConnectService.getClinicsByDoctorId(this.doctorId).subscribe({
+    this.mediConnectService.getAppointmentsByPatient(this.patientId).subscribe({
+      next: (appointments) => {
+        this.appointments = appointments;
+      }
+    });
+    this.mediConnectService.getAllClinics().subscribe({
       next: (clinics) => {
         this.clinics = clinics;
       }
     });
   }
-  loadAppointments(clinicId: number): void {
-    this.mediConnectService.getAppointmentsByClinic(clinicId).subscribe((appointments) => {
-      this.selectClinicAppointments = appointments;
-    });
+  deletePatient(): void {
+    if (confirm('Are you sure you want to delete your profile?')) {
+      this.mediConnectService.deletePatient(this.patientId).subscribe(() => {
+        this.patientDetails = null;
+      });
+    }
   }
 }
