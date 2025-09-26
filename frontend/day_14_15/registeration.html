@@ -14,26 +14,44 @@ registerPassword: it will be of atleast 8 characters
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Registration Page</title>
-  <script src="./js/validation.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
 </head>
 <body>
-  <h1>Registration Form</h1>
-  <form onsubmit="event.preventDefault(); register();">
-    <label for="name">Name</label>
-    <input type="text" id="name"><br>
+    <div class="registration-form">
+        <h1>Registration Form</h1>
+        <form id="registration-form">
+            <div class="form-group">
+                <label for="name">Username</label>
+                <input type="text" id="name" name="name">
+                <div id="name-error" class="form-group error"></div>
+            </div>
 
-    <label for="email">Email</label>
-    <input type="email" id="email"><br>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email">
+                <div id="email-error" class="form-group error"></div>
+            </div>
 
-    <label for="Username">Username</label>
-    <input type="text" id="Username"><br>
+            <div class="form-group">
+                <label for="Username">Username</label>
+                <input type="text" id="Username" name="Username">
+                <div id="Username-error" class="form-group error"></div>
+            </div>
 
-    <label for="password">Password</label>
-    <input type="password" id="password"><br>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" id="password" name="password">
+                <div id="Password-error" class="form-group error"></div>
+            </div>
 
-    <button type="submit">Register</button>
-  </form>
+            <button type="submit" class="submit-button">Submit</button>
+            <div id="success-message" class="success-message" style="display: none;"></div>
+        </form>
+    </div>
+    <script src="./js/validation.js">register()</script>
+        
+    
 </body>
 </html>

@@ -15,7 +15,7 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int appointmentId;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id")
     private Patient patient;
@@ -23,10 +23,20 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
-
-    Date appointmentDate;
-    String status;
-    String purpose;
+    private Date appointmentDate;
+    private String status;
+    private String purpose;
+    public Appointment() {
+    }
+    public Appointment(int appointmentId, Patient patient, Clinic clinic, Date appointmentDate, String status,
+            String purpose) {
+        this.appointmentId = appointmentId;
+        this.patient = patient;
+        this.clinic = clinic;
+        this.appointmentDate = appointmentDate;
+        this.status = status;
+        this.purpose = purpose;
+    }
     public int getAppointmentId() {
         return appointmentId;
     }
@@ -37,7 +47,7 @@ public class Appointment {
         return patient;
     }
     public void setPatient(Patient patient) {
-        this.patient= patient;
+        this.patient = patient;
     }
     public Clinic getClinic() {
         return clinic;
@@ -63,18 +73,9 @@ public class Appointment {
     public void setPurpose(String purpose) {
         this.purpose = purpose;
     }
-    public Appointment(int appointmentId, Patient patient, Clinic clinic, Date appointmentDate, String status,
-            String purpose) {
-        this.appointmentId = appointmentId;
-        this.patient = patient;
-        this.clinic = clinic;
-        this.appointmentDate = appointmentDate;
-        this.status = status;
-        this.purpose = purpose;
-    }
-    public Appointment() {
-    }
-    
     
 
+
+    
 }
+

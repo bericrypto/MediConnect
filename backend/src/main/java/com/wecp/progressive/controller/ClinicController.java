@@ -51,7 +51,7 @@ public class ClinicController {
     public ResponseEntity<List<Clinic>> getAllClinicByLocation(@PathVariable String location) {
         return new ResponseEntity<>(c.getAllClinicByLocation(location),HttpStatus.OK);
     }
-
+    @GetMapping("/doctor/{doctorId}")
     public ResponseEntity<List<Clinic>> getAllClinicByDoctorId(@PathVariable int doctorId) {
         return new ResponseEntity<>(c.getAllClinicByDoctorId(doctorId),HttpStatus.OK);
     }

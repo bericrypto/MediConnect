@@ -5,13 +5,13 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LogoutComponent } from './components/logout/logout.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegistrationComponent },
-  { path: 'logout', component: LogoutComponent }
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegistrationComponent },
+    { path: 'logout', component: LogoutComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class AuthRoutingModule {}

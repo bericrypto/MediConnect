@@ -1,22 +1,16 @@
-// src/app/shared/shared.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';  // ✅ Corrected import
+import { AuthModule } from '../auth/auth.module';
+import { NavBarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [
-    NavbarComponent   // ✅ Correct class name
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule
-  ],
-  exports: [
-    NavbarComponent   // ✅ Export correct class
-  ]
+  declarations: [NavBarComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    AuthModule
+  ],
+  exports: [NavBarComponent]
 })
 export class SharedModule {}

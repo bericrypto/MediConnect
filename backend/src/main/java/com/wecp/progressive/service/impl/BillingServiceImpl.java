@@ -27,6 +27,7 @@ public class BillingServiceImpl implements BillingService{
         return br.findAll();
     }
 
+
     @Override
     public Integer createBill(Billing billing) {
         return br.save(billing).getBillingId();
@@ -41,6 +42,7 @@ public class BillingServiceImpl implements BillingService{
     public List<Billing> getBillsByPatientId(int patientId) {
         return br.findByPatient_PatientId(patientId);
     }
+
 
     @Override
     public Billing getBillById(int billingId) {

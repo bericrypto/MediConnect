@@ -1,17 +1,18 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-navbar',
-//   templateUrl: './navbar.component.html',
-//   styleUrls: ['./navbar.component.scss']
-// })
-// export class NavBarComponent {}
-
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {}
+export class NavBarComponent implements OnInit {
+
+  constructor() { }
+
+  role:string|null;
+  ngOnInit(): void {
+    console.log(localStorage.getItem("role"));
+    this.role=localStorage.getItem("role");
+  }
+
+}

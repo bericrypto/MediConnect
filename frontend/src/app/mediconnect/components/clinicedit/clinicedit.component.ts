@@ -1,65 +1,104 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Clinic } from '../../models/Clinic';
+import { Doctor } from '../../models/Doctor';
 import { MediConnectService } from '../../services/mediconnect.service';
 
 @Component({
-  selector: 'app-clinic-edit',
-  templateUrl: './clinicedit.component.html',
-  styleUrls: ['./clinicedit.component.scss']
+    selector: 'app-clinicedit',
+    templateUrl: './clinicedit.component.html',
+    styleUrls: ['./clinicedit.component.scss']
 })
 export class ClinicEditComponent implements OnInit {
-  clinicForm!: FormGroup;
-  clinicId!: number;
-  successMessage: string | null = null;
-  errorMessage: string | null = null;
+    clinicForm!: FormGroup;
+    successMessage: string | null = null;
+    errorMessage: string | null = null;
 
-  constructor(
-    private fb: FormBuilder,
-    private service: MediConnectService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    clinicId: number;
+    clinic: Clinic;
+    doctorId: number;
+    doctor: Doctor;
 
-  ngOnInit(): void {
-    this.clinicId = Number(this.route.snapshot.paramMap.get('id'));
-    this.initForm();
+    constructor(
+        private formBuilder: FormBuilder,
+        private mediconnectService: MediConnectService,
+        private route: ActivatedRoute
+    ) { }
+    
+    ngOnInit(): void {
+        this.doctorId = Number(localStorage.getItem("doctor_id"));
+        this.clinicId = Number(this.route.snapshot.paramMap.get('id'));
+        this.initializeForm();
+        this.loadClinicDetails();
+    }
+    
+    initializeForm(): void {
+        this.clinicForm = this.formBuilder.group({
+            doctor: [{ value: '', disabled: true }],
+            clinicName: ['', [Validators.required, Validators.minLength(2)]],
+            location: ['', [Validators.required]],
+            contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+            establishedYear: [null, [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
+        });
+    }
 
-    if (this.clinicId) {
-      this.service.getAllClinics().subscribe({
-        next: (clinics) => {
-          const clinic = clinics.find((c) => c.clinicId === this.clinicId);
-          if (clinic) this.clinicForm.patchValue(clinic);
-        },
-        error: () => {
-          this.errorMessage = 'Failed to load clinic details.';
-        }
-      });
-    }
-  }
+    loadClinicDetails(): void {
+        this.mediconnectService.getDoctorById(this.doctorId).subscribe({
+            next: (response) => {
+                this.doctor = response;
+            },
+            error: (error) => console.log('Error loading loggedIn doctor details', error)
+        });
+        this.mediconnectService.getClinicById(this.clinicId).subscribe({
+            next: (response) => {
+                this.clinic = response;
+                this.clinicForm.patchValue({ 
+                    doctor: this.doctor.fullName,
+                    clinicName: this.clinic.clinicName,
+                    location: this.clinic.location,
+                    contactNumber: this.clinic.contactNumber,
+                    establishedYear: this.clinic.establishedYear
+                 });
+            },
+            error: (error) => console.log('Error loading clinic details', error),
+        });
+    }
 
-  initForm(): void {
-    this.clinicForm = this.fb.group({
-      clinicName: ['', Validators.required],
-      location: ['', Validators.required],
-      contactNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      establishedYear: ['', Validators.required]
-    });
-  }
+    onSubmit(): void {
+        if (this.clinicForm.valid) {
+            const clinic: Clinic = {
+                ...this.clinicForm.getRawValue(),
+                clinicId: this.clinic.clinicId,
+                doctor: this.doctor
+            };
+            this.mediconnectService.updateClinic(clinic).subscribe({
+                next: (response) => {
+                    this.errorMessage = null;
+                    console.log(response);
+                    this.clinicForm.reset();
+                    this.successMessage = 'Clinic updated successfully!';
+                },
+                error: (error) => {
+                    this.handleError(error);
+                }
+            });
+        }
+    }
 
-  onSubmit(): void {
-    if (this.clinicForm.valid) {
-      this.service.updateClinic(this.clinicId, this.clinicForm.value).subscribe({
-        next: () => {
-          this.successMessage = 'Clinic updated successfully!';
-          this.errorMessage = null;
-          setTimeout(() => this.router.navigate(['/dashboard']), 1500);
-        },
-        error: () => {
-          this.errorMessage = 'Update failed. Please try again.';
-          this.successMessage = null;
-        }
-      });
-    }
-  }
+    private handleError(error: HttpErrorResponse): void {
+        if (error.error instanceof ErrorEvent) {
+          
+            this.errorMessage = `Client-side error: ${error.error.message}`;
+        } else {
+            
+            this.errorMessage = `Server-side error: ${error.status} ${error.message}`;
+            
+            if (error.status === 400) {
+                this.errorMessage = 'Bad request. Please check your input.';
+            }
+        }
+        this.successMessage = null;
+    }
 }

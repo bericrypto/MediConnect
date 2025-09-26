@@ -1,11 +1,10 @@
-<div>
-    patientId: {{ patient.patientId }} <br />
-    fullName: {{ patient.fullName }} <br />
-    dateOfBirth: {{ patient.dateOfBirth }} <br />
-    contactNumber: {{ patient.contactNumber }} <br />
-    email: {{ patient.email }} <br />
-    address: {{ patient.address }} <br />
-  </div>
-  
+<div class="patient-container">
+  <h2>Patient Details</h2>
+  <p><strong>patientId:</strong> {{ patient.patientId }}</p>
+  <p><strong>fullName:</strong> {{ patient.fullName }}</p>
+  <p><strong>dateOfBirth:</strong> {{ patient.dateOfBirth | date:'yyyy-MM-dd' }}</p>
+  <p><strong>contactNumber:</strong> {{ patient.contactNumber }}</p>
+  <p><strong>email:</strong> {{ patient.email }}</p>
+  <p><strong>address:</strong> {{ patient.address }}</p>
   <button (click)="logPatientAttributes()">Log Patient Attributes</button>
-  
+</div>

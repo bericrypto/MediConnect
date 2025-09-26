@@ -1,111 +1,77 @@
-import { Component, OnInit } from '@angular/core'; 
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+@Component({
+    selector: 'app-registration',
+    templateUrl: './registration.component.html',
+    styleUrls: ['./registration.component.scss'],
+})
+export class RegistrationComponent {
+    registrationForm!: FormGroup;
+    successMessage: string | null = null;
+    errorMessage: string | null = null;
+    selectedRole: string | null = null;
 
- 
+    constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
-@Component({ 
+    ngOnInit(): void {
+        this.registrationForm = this.formBuilder.group({
+            username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)]],
+            role: ['', [Validators.required]],
+            fullName: ['', Validators.required],
+            contactNumber: ['', Validators.required],
+            specialty: [''],
+            yearsOfExperience: [null], 
+            dateOfBirth: [null], 
+            address: [''], 
+        });
+    }
 
-  selector: 'app-registration', 
+    onRoleChange(event: Event): void {
+        const selectElement = event.target as HTMLSelectElement;
+        const role = selectElement.value;
+        this.selectedRole = role;
 
-  templateUrl: './registration.component.html', 
+        
+        if (role === 'DOCTOR') {
+            this.registrationForm.patchValue({ dateOfBirth: null, address: '' });
+        } else if (role === 'PATIENT') {
+            this.registrationForm.patchValue({ specialty: '', yearsOfExperience: null });
+        }
+    }
 
-  styleUrls: ['./registration.component.scss'] 
 
-}) 
+    onSubmit(): void {
+        if (this.registrationForm.valid) {
+            this.authService.createUser(this.registrationForm.value).subscribe(
+                (response: string) => {
+                    this.successMessage = "User successfully registered";
+                    this.errorMessage = null;
+                    this.resetForm();
+                    console.log('Success:', this.successMessage);
+                },
+                (error: HttpErrorResponse) => {
+                    if (error.error) {
+                        this.errorMessage = error.error;
+                    } else {
+                        this.errorMessage = 'An unexpected error occurred. Please try again later.';
+                    }
+                    this.successMessage = null;
+                    console.error('Error:', this.errorMessage);
+                }
+            );
+        } else {
+            this.errorMessage = 'Please fill out all fields correctly.';
+            this.successMessage = null;
+        }
+    }
+    
 
-export class RegistrationComponent implements OnInit { 
-
-  registrationForm!: FormGroup; 
-
-  successMessage: string | null = null; 
-
-  errorMessage: string | null = null; 
-
- 
-
-  constructor(private fb: FormBuilder) {} 
-
- 
-
-  ngOnInit(): void { 
-
-    this.registrationForm = this.fb.group({ 
-
-      username: [ 
-
-        '', 
-
-        [ 
-
-          Validators.required, 
-
-          Validators.pattern(/^[a-zA-Z0-9]+$/) // no special chars 
-
-        ] 
-
-      ], 
-
-      email: ['', [Validators.required, Validators.email]], 
-
-      password: [ 
-
-        '', 
-
-        [ 
-
-          Validators.required, 
-
-          Validators.minLength(8), 
-
-          Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/) 
-
-        ] 
-
-      ], 
-
-      role: ['', Validators.required] 
-
-    }); 
-
-  } 
-
- 
-
-  get username() { return this.registrationForm.get('username'); } 
-
-  get email() { return this.registrationForm.get('email'); } 
-
-  get password() { return this.registrationForm.get('password'); } 
-
-  get role() { return this.registrationForm.get('role'); } 
-
- 
-
-  onSubmit(): void { 
-
-    if (this.registrationForm.valid) { 
-
-      // Mock backend success 
-
-      this.successMessage = 'Registration successful!'; 
-
-      this.errorMessage = null; 
-
-      console.log('Registration Data:', this.registrationForm.value); 
-
-      this.registrationForm.reset(); 
-
-    } else { 
-
-      this.errorMessage = 'Please fill all required fields correctly.'; 
-
-      this.successMessage = null; 
-
-      this.registrationForm.markAllAsTouched(); 
-
-    } 
-
-  } 
-
-} 
+    resetForm(): void {
+        this.registrationForm.reset();
+    }
+}

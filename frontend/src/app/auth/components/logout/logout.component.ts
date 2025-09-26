@@ -1,21 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-logout',
-  templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.scss']
+    selector: 'app-logout',
+    templateUrl: './logout.component.html',
+    styleUrls: ['./logout.component.scss']
 })
 export class LogoutComponent {
 
-  constructor(private router: Router) {}
+    constructor(private authService: AuthService, private router: Router) { }
 
-  logout(): void {
-    // clear token and any other user data
-    localStorage.removeItem('token');
-    localStorage.clear();
+    logout(): void {
+        this.authService.logout();
+        this.router.navigate(["/auth"]);
+    }
 
-    // navigate to login page
-    this.router.navigate(['/login']);
-  }
 }

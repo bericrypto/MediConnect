@@ -60,4 +60,16 @@ public class ClinicServiceImplJdbc implements ClinicService {
             throw new Exception("Error deleting clinic with ID " + clinicId, e);
         }
     }
+
+    @Override
+    public List<Clinic> getAllClinicByLocation(String location) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllClinicByLocation'");
+    }
+
+    @Override
+    public List<Clinic> getAllClinicByDoctorId(int doctorId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllClinicByDoctorId'");
+    }
 }

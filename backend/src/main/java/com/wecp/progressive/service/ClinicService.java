@@ -17,7 +17,7 @@ public interface ClinicService {
     public void deleteClinic(int clinicId) throws Exception;
 
     //Do not implement these methods in ClinicServiceImplJdbc.java class
-    default public List<Clinic> getAllClinicByLocation(String location) { return null; }
+    public List<Clinic> getAllClinicByLocation(String location);
 
-    default public List<Clinic> getAllClinicByDoctorId(int doctorId) { return null; }
+    public List<Clinic> getAllClinicByDoctorId(int doctorId);
 }

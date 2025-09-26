@@ -1,25 +1,46 @@
-
-
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-doctor-array',
-  templateUrl: './doctorarray.component.html',
-  styleUrls: ['./doctorarray.component.scss']
+    selector: 'app-doctorarray',
+    templateUrl: './doctorarray.component.html',
+    styleUrls: ['./doctorarray.component.scss']
 })
 export class DoctorArrayComponent implements OnInit {
-  doctors: any[] = [];
-  showDetails: boolean = false;
+    doctors: any[] = [];
+    showDetails: boolean = false;
 
-  ngOnInit(): void {
-    this.doctors = [
-      { fullName: 'Dr. Jane Smith', specialty: 'Cardiology', contactNumber: '111-111-1111', email: 'jane.smith@example.com', yearsOfExperience: 10 },
-      { fullName: 'Dr. John Doe', specialty: 'Orthopedics', contactNumber: '222-222-2222', email: 'john.doe@example.com', yearsOfExperience: 8 },
-      { fullName: 'Dr. Emily Johnson', specialty: 'Pediatrics', contactNumber: '333-333-3333', email: 'emily.johnson@example.com', yearsOfExperience: 12 }
-    ];
-  }
+    constructor() { }
 
-  toggleDetails(): void {
-    this.showDetails = !this.showDetails;
-  }
+    ngOnInit(): void {
+        this.doctors = [
+            {
+                doctorId: 1,
+                fullName: 'Dr. Jane Smith',
+                specialty: 'Cardiology',
+                contactNumber: '1234567890',
+                email: 'jane.smith@example.com',
+                yearsOfExperience: 15
+            },
+            {
+                doctorId: 2,
+                fullName: 'Dr. John Doe',
+                specialty: 'Orthopedics',
+                contactNumber: '9876543210',
+                email: 'john.doe@example.com',
+                yearsOfExperience: 10
+            },
+            {
+                doctorId: 3,
+                fullName: 'Dr. Alice Johnson',
+                specialty: 'Pediatrics',
+                contactNumber: '4567891230',
+                email: 'alice.johnson@example.com',
+                yearsOfExperience: 8
+            }
+        ];
+    }
+
+    toggleDetails(): void {
+        this.showDetails = !this.showDetails;
+    }
 }

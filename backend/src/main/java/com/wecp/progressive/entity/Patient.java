@@ -1,11 +1,16 @@
 package com.wecp.progressive.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Patient implements Comparable<Patient> {
@@ -19,10 +24,15 @@ public class Patient implements Comparable<Patient> {
     private String email;
     private String address;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Billing> billing = new ArrayList<>();
+
     public Patient() {
     }
+    
 
-    public Patient(int patientId, String fullName, Date dateOfBirth, String contactNumber, String email, String address) {
+    public Patient(int patientId, String fullName, Date dateOfBirth, String contactNumber, String email,
+            String address) {
         this.patientId = patientId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -30,6 +40,19 @@ public class Patient implements Comparable<Patient> {
         this.email = email;
         this.address = address;
     }
+
+
+    // public Patient(int patientId, String fullName, Date dateOfBirth, String contactNumber, String email, String address,
+    //         List<Billing> billing) {
+    //     this.patientId = patientId;
+    //     this.fullName = fullName;
+    //     this.dateOfBirth = dateOfBirth;
+    //     this.contactNumber = contactNumber;
+    //     this.email = email;
+    //     this.address = address;
+    //     this.billing = billing;
+    // }
+    
 
     public int getPatientId() {
         return patientId;
@@ -83,4 +106,10 @@ public class Patient implements Comparable<Patient> {
     public int compareTo(Patient otherPatient) {
         return this.getFullName().compareTo(otherPatient.getFullName());
     }
+    // public List<Billing> getBilling() {
+    //     return billing;
+    // }
+    // public void setBilling(List<Billing> billing) {
+    //     this.billing = billing;
+    // }
 }
